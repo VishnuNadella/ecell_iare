@@ -104,10 +104,11 @@ def decrypter_cst(data):
         rn, req_id = decrypted.decode().split("+")
         prsn = collection.find_one({ "roll_number": rn })
         if prsn != None:
+            nme = prsn["name"]
             if prsn["attended?"] == False:
                 collection.update_one({ "roll_number" : rn }, {"$set" : {"attended?" : True}})
-                st.success("Welcome to T-Hub event, Enjoy your self")
+                st.success(f"Welcome to T-Hub event {nme}, Enjoy your self")
             elif prsn["attended?"] == True:
-                st.warning("Person has already been authenticated")
+                st.warning(f"Person {nme} has already been authenticated")
         elif prsn == None:
             st.error("Person dosent exist")

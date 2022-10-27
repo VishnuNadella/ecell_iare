@@ -19,7 +19,8 @@ collection = db["members"]
 
 salt = bc.gensalt(rounds = 9)
 # key = Fernet.generate_key()
-key = b'penkShqdJnrIEZU-84g34MhKJePqcXpeYna3zmaIoNs='
+key = st.secrets["key"]
+key = key.encode("utf-8")
 
 fernet = Fernet(key)
 

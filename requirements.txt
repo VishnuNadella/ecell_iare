@@ -6,3 +6,4 @@ pillow==9.1.1
 streamlit-option-menu==0.3.2
 pymongo==4.1.1
 cryptography==37.0.2
+dnspython==2.2.1

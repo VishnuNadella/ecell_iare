@@ -1,0 +1,8 @@
+pyzbar==0.1.8
+streamlit==1.4.0
+pymongo==4.1.1
+bcrypt==3.2.2
+pillow==9.1.1
+streamlit-option-menu==0.3.2
+pymongo==4.1.1
+cryptography==37.0.2

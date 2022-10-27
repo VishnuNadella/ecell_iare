@@ -1,0 +1,32 @@
+"""
+    For on the spot registration for events
+"""
+
+from pymongo import *
+import streamlit as st
+
+usn = st.secrets["db_username"]
+pwd = st.secrets["db_password"]
+
+connection_str = f"mongodb+srv://{usn}:{pwd}@cluster0.ntw5wzk.mongodb.net/?retryWrites=true&w=majority"
+
+cluster = MongoClient(connection_str)
+
+db = cluster["events"]
+collection = db["attendees"]
+
+def app():
+    st.title("Sign Up Here")
+    name = st.text_input("Enter Name: ", key = 1)
+    roll_number = st.text_input("Enter Roll Number: ", key = 2)
+    branch = st.text_input("Enter Branch:")
+    section = st.text_input("Enter Section:")
+    semester = st.text_input("Enter Semester:")
+    struct_data = {"name": name, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True}
+    if st.button("Submit details"):
+        try:
+            collection.insert_one(struct_data)
+            st.success("Person added successfully")
+        except Exception as e:
+            st.error("Error from DB side")
+            print("Error", e)

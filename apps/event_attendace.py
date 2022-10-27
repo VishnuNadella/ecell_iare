@@ -40,8 +40,8 @@ def add_to_file(data):
     writer.writerow(data)
     f.close()
 
-key = b'penkShqdJnrIEZU-84g34MhKJePqcXpeYna3zmaIoNs='
-
+key = st.secrets["key"]
+key = key.encode("utf-8")
 fernet = Fernet(key)
 
 usn = st.secrets["db_username"]

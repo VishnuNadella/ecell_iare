@@ -1,7 +1,6 @@
 """
 Here Name, responsibilities, team members, V2.0: Should be able to edit DB in realtime
 """
-from tkinter import font
 import streamlit as st
 from pymongo import *
 

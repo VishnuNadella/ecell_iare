@@ -36,7 +36,7 @@ def app():
         # first check whether person with the mail id exists or not
         person_check = collection.find_one({"roll_number": roll_number})
         rn_part, rest_part = mail_id.lower().split("@")
-    if (roll_number == rn_part) and (len(roll_number) == 10) and (rest_part == "iare.ac.in") and person_check == None: # add students list if possible for better authentication
+    if (roll_number.lower() == rn_part.lower()) and (len(roll_number) == 10) and (rest_part == "iare.ac.in") and person_check == None: # add students list if possible for better authentication
         if pwd == cfm_pwd and len(pwd) >= 8:
             req_pwd = str(pwd).encode('utf-8')
             hashed = bc.hashpw(req_pwd, salt)

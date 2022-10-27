@@ -4,16 +4,20 @@
 
 from pymongo import *
 import streamlit as st
+from cryptography.fernet import Fernet
+
 
 usn = st.secrets["db_username"]
 pwd = st.secrets["db_password"]
-
+key = st.secrets["key"]
+key = key.encode()
 connection_str = f"mongodb+srv://{usn}:{pwd}@cluster0.ntw5wzk.mongodb.net/?retryWrites=true&w=majority"
 
 cluster = MongoClient(connection_str)
 
 db = cluster["events"]
 collection = db["attendees"]
+fernet = Fernet(key)
 
 def app():
     st.title("Sign Up Here")
@@ -22,7 +26,9 @@ def app():
     branch = st.text_input("Enter Branch:")
     section = st.text_input("Enter Section:")
     semester = st.text_input("Enter Semester:")
-    struct_data = {"name": name, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True}
+    hashed = roll_number.lower().encode("utf-8")
+    hashed = fernet.encrypt(hashed)
+    struct_data = {"name": name, "code" : hashed, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True}
     if st.button("Submit details"):
         try:
             collection.insert_one(struct_data)

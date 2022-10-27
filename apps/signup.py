@@ -48,6 +48,7 @@ def app():
     elif len(mail_id) == 0:
         pass
     else:
+        print(rn_part, rest_part, roll_number, person_check)
         st.error("Invalid Email ID, PLease use your domain mail id")
     if st.button("Submit"):
         # Push data to the database

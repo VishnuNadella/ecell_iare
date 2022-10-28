@@ -103,7 +103,7 @@ def decrypter_cst(data):
     if len(data) > 0:
         decrypted = fernet.decrypt(data)
         rn = decrypted.decode()
-        print(decrypted, rn)
+        print("\n\n details", decrypted, rn)
         prsn = collection.find_one({ "roll_number": rn })
         if prsn != None:
             nme = prsn["name"]

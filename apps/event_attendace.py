@@ -16,6 +16,7 @@ from PIL import Image
 import os
 from pymongo import *
 from cryptography.fernet import Fernet
+from datetime import datetime as dt
 
 file_path = os.getcwd()
 try:
@@ -106,7 +107,9 @@ def decrypter_cst(data):
         if prsn != None:
             nme = prsn["name"]
             if prsn["attended?"] == False:
-                collection.update_one({ "roll_number" : rn }, {"$set" : {"attended?" : True}})
+                time = dt.now()
+                time = time.strftime("%H:%M:%S")
+                collection.update_one({ "roll_number" : rn }, {"$set" : {"attended?" : True, "time" : time}})
                 st.success(f"Welcome to T-Hub event {nme}, Enjoy your self")
             elif prsn["attended?"] == True:
                 st.warning(f"Person {nme} has already been authenticated")

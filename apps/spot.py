@@ -5,7 +5,7 @@
 from pymongo import *
 import streamlit as st
 from cryptography.fernet import Fernet
-
+from datetime import datetime as dt
 
 usn = st.secrets["db_username"]
 pwd = st.secrets["db_password"]
@@ -28,7 +28,9 @@ def app():
     semester = st.text_input("Enter Semester:")
     hashed = roll_number.lower().encode("utf-8")
     hashed = fernet.encrypt(hashed)
-    struct_data = {"name": name, "code" : hashed, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True}
+    time = dt.now()
+    time = time.strftime("%H:%M:%S")
+    struct_data = {"name": name, "code" : hashed, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True, "time": time}
     if st.button("Submit details"):
         try:
             collection.insert_one(struct_data)

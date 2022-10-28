@@ -28,7 +28,7 @@ def create_file():
     f_cnt = st.session_state["download_file_count"]
     req_str = f'./Files/participants.csv'
     f = open(req_str, 'w', newline='')
-    header = ["name", "roll number", "branch", "section", "semester"]
+    header = ["name", "roll number", "branch", "section", "semester", "time stamp"]
     writer = csv.writer(f)
     writer.writerow(header)
     f.close()

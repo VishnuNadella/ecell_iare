@@ -7,21 +7,11 @@ LOGO_adr = "./apps/resources/ecell_logo.png"
 import streamlit as st
 st.set_page_config(page_title = "E - Cell", page_icon = LOGO_adr, initial_sidebar_state = 'auto')
 from Main import router
-# from apps import home, attendance, log, meals, events, view, auth
 from apps import home, login, attendance, engage, admin, leads_portal, logout, profile, signup, event_attendace, test, spot
 import bcrypt as bc
 data = None
 
 
-# fl = open("admin_login.json")
-# data = json.load(fl)
-
-# Here use database and fetch admin logins from there, create a separate channel
-
-
-# fl.close()
-
-# st.image(LOGO_adr)
 
 app = router()
 
@@ -33,8 +23,8 @@ st.sidebar.image(LOGO_adr)
 st.sidebar.markdown(
     """<div style="text-align:center"><strong>E - Cell</strong><br><br></div>""", unsafe_allow_html=True)
 
-# st.sidebar.markdown(
-#     '''<br><br><div style="text-align: center"><small>Developed by Vishnu Nadella for E - Cell | Oct 2022 </small></div>''', unsafe_allow_html=True)
+st.sidebar.markdown(
+     '''<br><br><div style="text-align: center"><small>Developed by Vishnu Nadella for E - Cell | Oct 2022 </small></div>''', unsafe_allow_html=True)
 
 
 app.add_app("home", home.app)

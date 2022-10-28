@@ -58,7 +58,8 @@ collection = db["attendees"]
 def fect_from_db():
     create_file()
     for file in collection.find():
-        if file["attended?"]:
+        if file["attended?"] == True:
+            print(file)
             name = file["name"]
             roll_number = file["roll_number"]
             branch = file["branch"]

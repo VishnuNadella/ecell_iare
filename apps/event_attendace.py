@@ -64,7 +64,8 @@ def fect_from_db():
             branch = file["branch"]
             section = file["section"]
             sem = file["sem"]
-            add_to_file([name, roll_number, branch, section, sem])
+            tme = file["time"]
+            add_to_file([name, roll_number, branch, section, sem, tme])
     return True
 
 def app():

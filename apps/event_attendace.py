@@ -16,7 +16,10 @@ from PIL import Image
 import os
 from pymongo import *
 from cryptography.fernet import Fernet
+
 from datetime import datetime as dt
+from dateutil.tz import gettz
+dtobj = dt.now(tz=gettz('Asia/Kolkata'))
 
 file_path = os.getcwd()
 try:
@@ -53,7 +56,7 @@ connection_str = f"mongodb+srv://{usn}:{pwd}@cluster0.ntw5wzk.mongodb.net/?retry
 cluster = MongoClient(connection_str)
 
 db = cluster["events"]
-collection = db["attendees"]
+collection = db["Open_House"]
 
 def fect_from_db():
     create_file()
@@ -115,7 +118,7 @@ def decrypter_cst(data):
         if prsn != None:
             nme = prsn["name"]
             if prsn["attended?"] == False:
-                time = dt.now()
+                time = dt.now(tz=gettz('Asia/Kolkata'))
                 time = time.strftime("%H:%M:%S")
                 collection.update_one({ "roll_number" : rn }, {"$set" : {"attended?" : True, "time" : time}})
                 st.success(f"Welcome to T-Hub event {nme}, Enjoy your self")

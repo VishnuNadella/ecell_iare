@@ -16,7 +16,7 @@ connection_str = f"mongodb+srv://{usn}:{pwd}@cluster0.ntw5wzk.mongodb.net/?retry
 cluster = MongoClient(connection_str)
 
 db = cluster["events"]
-collection = db["attendees"]
+collection = db["Open_House"]
 fernet = Fernet(key)
 
 def app():

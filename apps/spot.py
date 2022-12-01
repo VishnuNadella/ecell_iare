@@ -6,6 +6,7 @@ from pymongo import *
 import streamlit as st
 from cryptography.fernet import Fernet
 from datetime import datetime as dt
+from dateutil.tz import gettz
 
 usn = st.secrets["db_username"]
 pwd = st.secrets["db_password"]
@@ -28,7 +29,7 @@ def app():
     semester = st.text_input("Enter Semester:")
     hashed = roll_number.lower().encode("utf-8")
     hashed = fernet.encrypt(hashed)
-    time = dt.now()
+    time = dt.now(tz=gettz('Asia/Kolkata'))
     time = time.strftime("%H:%M:%S")
     struct_data = {"name": name, "code" : hashed, "roll_number": roll_number, "branch": branch, "section": section, "sem" : semester, "attended?": True, "time": time}
     if st.button("Submit details"):
